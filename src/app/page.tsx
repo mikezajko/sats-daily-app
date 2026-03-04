@@ -3,6 +3,21 @@
 import { usePrivy } from "@privy-io/react-auth";
 
 export default function Home() {
+  const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
+
+  if (!appId) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 gap-8">
+        <h1 className="text-4xl font-bold">Sats Daily</h1>
+        <p className="text-lg text-gray-600">Loading...</p>
+      </div>
+    );
+  }
+
+  return <HomeContent />;
+}
+
+function HomeContent() {
   const { ready, authenticated, user, login, logout } = usePrivy();
 
   if (!ready) {

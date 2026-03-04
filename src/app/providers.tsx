@@ -4,9 +4,15 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { base } from "viem/chains";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
+
+  if (!appId) {
+    return <>{children}</>;
+  }
+
   return (
     <PrivyProvider
-      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
+      appId={appId}
       config={{
         loginMethods: ["email", "google"],
         appearance: {
