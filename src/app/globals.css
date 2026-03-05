@@ -1,19 +1,123 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gold: #F0A500;
+  --gold-light: #FFD166;
+  --gold-dim: rgba(240,165,0,0.10);
+  --gold-border: rgba(240,165,0,0.28);
+  --bg: #0E0D0B;
+  --surface: #181714;
+  --surface2: #201E1A;
+  --border: rgba(255,255,255,0.07);
+  --text: #F5F2EC;
+  --muted: #6B6760;
+  --muted2: #9E9890;
+  --green: #4ADE80;
+  --green-dim: rgba(74,222,128,0.10);
+  --red: #F87171;
+  --red-dim: rgba(248,113,113,0.10);
+  --radius: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes gleam {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fall {
+  0% { top: -10px; opacity: 1; transform: rotate(0deg) translateX(0); }
+  100% { top: 110vh; opacity: 0; transform: rotate(720deg) translateX(var(--drift)); }
+}
+
+@keyframes laserPulse {
+  0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 14px #ff4400); }
+  50% { opacity: 1; filter: drop-shadow(0 0 10px #ff0000) drop-shadow(0 0 24px #ff6600); }
+}
+
+.animate-blink {
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+.animate-gleam {
+  animation: gleam 2.2s ease-in-out infinite;
+}
+
+.animate-modal-in {
+  animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+.animate-laser {
+  animation: laserPulse 1.4s ease-in-out infinite;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  opacity: 0;
+  animation: fall 3s ease-in forwards;
+}
+
+/* Font classes */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-dm-serif {
+  font-family: 'DM Serif Display', serif;
+}
+
+.font-lato {
+  font-family: 'Lato', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted2);
 }
